@@ -8,6 +8,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import Objets.Tuyaux;
+import Perso.FlappyBird;
 
 public class Scene extends JPanel {
 	
@@ -22,13 +23,13 @@ public class Scene extends JPanel {
 	public Tuyaux tuyauHaut3;
 	public Tuyaux tuyauBas3;
 	
+	public FlappyBird flappyBird;
 	
 	private final int LargeurFond = 140;
 	private final int DistanceTuyaux = 250;
 	private final int EcartTuyaux = 120;
 	
 	public int xFond;
-	private int dxTuyaux;
 	private int xTuyaux;
 	
 	
@@ -42,7 +43,6 @@ public class Scene extends JPanel {
 		this.imgFond = this.IconFond.getImage();
 		this.xFond = 0;
 		this.xTuyaux = 100;
-		this.dxTuyaux = 0;
 		
 		this.tuyauHaut1 = new Tuyaux(this.xTuyaux, -150, "/image/tuyauHaut.png");
 		this.tuyauBas1 = new Tuyaux(this.xTuyaux, 250, "/image/tuyauBas.png");
@@ -51,7 +51,13 @@ public class Scene extends JPanel {
 		this.tuyauHaut3 = new Tuyaux(this.xTuyaux + this.DistanceTuyaux *2, -150, "/image/tuyauHaut.png");
 		this.tuyauBas3 = new Tuyaux(this.xTuyaux + this.DistanceTuyaux *2, 250, "/image/tuyauBas.png");
 		
+		this.flappyBird = new FlappyBird(100, 150, "/image/oiseau.png");
+		
 		TuyauxHasard = new Random();
+		
+		this.setFocusable(true);
+		this.requestFocusInWindow();
+		this.addKeyListener(new Clavier());
 		
 		Thread DefilementEcran = new Thread(new Defilement());
 		DefilementEcran.start();
@@ -111,5 +117,7 @@ public class Scene extends JPanel {
 	public void paintComponent (Graphics g) {
 		this.defilementFond(g);
 		this.defilementTuyaux(g);
+		this.flappyBird.setYOiseau(this.flappyBird.getYOiseau() + 1);
+		g.drawImage(this.flappyBird.getImgOiseau(), this.flappyBird.getxOiseau(), this.flappyBird.getYOiseau(), null);
 	}
 }

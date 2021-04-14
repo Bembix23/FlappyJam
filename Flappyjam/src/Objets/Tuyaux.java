@@ -26,7 +26,8 @@ public class Tuyaux {
 		this.icoTuyaux = new ImageIcon(getClass().getResource(this.strImage));
 		this.imgTuyaux = this.icoTuyaux.getImage();
 	}
-
+	
+	// Getter
 	public int getX() {return x;}
 	
 	public int getY() {return y;}
@@ -38,7 +39,7 @@ public class Tuyaux {
 	public Image getImgTuyaux() {return imgTuyaux;}
 	
 	
-	
+	// Setter
 	public void setX(int x) {this.x = x;}
 
 	public void setY(int y) {this.y = y;}
