@@ -1,4 +1,4 @@
-package Jam;
+  package Jam;
 
 import java.awt.Graphics;
 import java.awt.Image;
