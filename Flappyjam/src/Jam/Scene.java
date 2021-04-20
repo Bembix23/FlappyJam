@@ -31,7 +31,7 @@ public class Scene extends JPanel {
 	
 	public int xFond;
 	private int xTuyaux;
-	
+	public boolean gameOver;
 	
 	private Random TuyauxHasard;
 	
@@ -42,7 +42,8 @@ public class Scene extends JPanel {
 		this.IconFond = new ImageIcon(getClass() .getResource("/image/bandeFondEcran.png"));
 		this.imgFond = this.IconFond.getImage();
 		this.xFond = 0;
-		this.xTuyaux = 100;
+		this.xTuyaux = 400;
+		this.gameOver = false;
 		
 		this.tuyauHaut1 = new Tuyaux(this.xTuyaux, -150, "/image/tuyauHaut.png");
 		this.tuyauBas1 = new Tuyaux(this.xTuyaux, 250, "/image/tuyauBas.png");
@@ -114,9 +115,36 @@ public class Scene extends JPanel {
 		
 	}
 	
+	private boolean collisionFlappy(){
+        boolean gameOver = false;
+		// Collision Tuyau 1
+		if(this.flappyBird.getxOiseau() + this.flappyBird.getLargeurOiseau() > this.tuyauBas1.getX() - 10 && 
+				this.flappyBird.getxOiseau() < this.tuyauBas1.getX() + this.tuyauBas1.getLargeur() + 10){
+			gameOver = this.flappyBird.collision(this.tuyauBas1);
+			if(gameOver == false){gameOver = this.flappyBird.collision(this.tuyauHaut1);}
+		}else{
+			// Collision Tuyau 2
+			if(this.flappyBird.getxOiseau() + this.flappyBird.getLargeurOiseau() > this.tuyauBas2.getX() - 10 && this.flappyBird.getxOiseau() < this.tuyauBas2.getX() + this.tuyauBas2.getLargeur() + 10){
+				gameOver = this.flappyBird.collision(this.tuyauBas2);
+				if(gameOver == false){gameOver = this.flappyBird.collision(this.tuyauHaut2);}			
+		    }else{
+				// Collision Tuyau 3
+			    if(this.flappyBird.getxOiseau() + this.flappyBird.getLargeurOiseau() > this.tuyauBas3.getX() - 10 && this.flappyBird.getxOiseau() < this.tuyauBas3.getX() + this.tuyauBas3.getLargeur() + 10){
+			    	gameOver = this.flappyBird.collision(this.tuyauBas3);
+				    if(gameOver == false){gameOver = this.flappyBird.collision(this.tuyauHaut3);}
+			}else{
+				// Collision Sol
+				if(this.flappyBird.getYOiseau() < 0 || this.flappyBird.getYOiseau() + this.flappyBird.getHauteurOiseau() > 355){gameOver = true;}else{gameOver = false;}
+		        }
+		    }
+	    }
+		return gameOver;
+	}
+	
 	public void paintComponent (Graphics g) {
 		this.defilementFond(g);
 		this.defilementTuyaux(g);
+		this.gameOver = this.collisionFlappy();
 		this.flappyBird.setYOiseau(this.flappyBird.getYOiseau() + 1);
 		g.drawImage(this.flappyBird.getImgOiseau(), this.flappyBird.getxOiseau(), this.flappyBird.getYOiseau(), null);
 	}

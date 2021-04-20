@@ -4,6 +4,8 @@ import java.awt.Image;
 
 import javax.swing.ImageIcon;
 
+import Objets.Tuyaux;
+
 public class FlappyBird implements Runnable {
 	
 	// Variables 
@@ -68,6 +70,18 @@ public class FlappyBird implements Runnable {
 			this.icoOiseau = new ImageIcon(getClass() .getResource("/image/oiseau1.png"));
 			this.imgOiseau = this.icoOiseau.getImage();
 		}
+	}
+	
+	
+	public boolean collision(Tuyaux tuyaux) {
+		if(tuyaux.getY() < 50) {
+			if(this.YOiseau <= tuyaux.getY() + tuyaux.getHauteur() && this.xOiseau + this.largeurOiseau >= tuyaux.getX() && 
+					this.xOiseau <= tuyaux.getX() + tuyaux.getLargeur()){return true;}
+			else{return false;}
+		} else
+			if(this.YOiseau + this.hauteurOiseau >= tuyaux.getY() && this.xOiseau + this.largeurOiseau >= tuyaux.getX() && 
+			this.xOiseau <= tuyaux.getX() + tuyaux.getLargeur()){return true;}
+		     else{return false;}
 	}
 
 

@@ -7,7 +7,7 @@ public class Defilement implements Runnable  {
 	@Override
 	public void run() {
 		
-		while (true) {
+		while (Main.scene.gameOver == false ) {
 			Main.scene.xFond--;
 			Main.scene.repaint();
 			try {
