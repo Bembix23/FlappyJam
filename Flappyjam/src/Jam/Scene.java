@@ -1,4 +1,4 @@
-  package Jam;
+package Jam;
 
 import java.awt.Graphics;
 import java.awt.Image;
@@ -51,7 +51,7 @@ public class Scene extends JPanel {
 		this.tuyauHaut3 = new Tuyaux(this.xTuyaux + this.DistanceTuyaux *2, -150, "/image/tuyauHaut.png");
 		this.tuyauBas3 = new Tuyaux(this.xTuyaux + this.DistanceTuyaux *2, 250, "/image/tuyauBas.png");
 		
-		this.flappyBird = new FlappyBird(100, 150, "/image/oiseau.png");
+		this.flappyBird = new FlappyBird(100, 150, "/image/oiseau1.png");
 		
 		TuyauxHasard = new Random();
 		

@@ -4,7 +4,7 @@ import java.awt.Image;
 
 import javax.swing.ImageIcon;
 
-public class FlappyBird {
+public class FlappyBird implements Runnable {
 	
 	// Variables 
 	private int largeurOiseau;
@@ -15,6 +15,7 @@ public class FlappyBird {
 	private String strImage;
 	private ImageIcon icoOiseau;
 	private Image imgOiseau;
+	private final int PAUSE = 10;
 	
 	
 	// Constructeur 
@@ -27,6 +28,9 @@ public class FlappyBird {
 		this.strImage = strImage;
 		this.icoOiseau = new ImageIcon(getClass() .getResource(this.strImage));
 		this.imgOiseau = this.icoOiseau.getImage();
+		
+		Thread BattementAiles = new Thread(this);
+		BattementAiles.start();
 	}
 	
 
@@ -47,7 +51,37 @@ public class FlappyBird {
 	public void monte() {
 		
 		this.dOiseau = 50;
-		this.YOiseau = this.YOiseau - this.dOiseau;
+	}
+	
+	private void Ailes(int dOiseau) {
+		
+		if (dOiseau > 10) {
+			this.icoOiseau = new ImageIcon(getClass() .getResource("/image/oiseau2.png"));
+			this.imgOiseau = this.icoOiseau.getImage();
+			this.YOiseau = this.YOiseau - 3;
+			
+		} else if (dOiseau > 5) {
+			this.YOiseau = this.YOiseau - 2;
+		} else if (dOiseau > 1) {
+			this.YOiseau = this.YOiseau - 1;
+		} else if (dOiseau == 1) {
+			this.icoOiseau = new ImageIcon(getClass() .getResource("/image/oiseau1.png"));
+			this.imgOiseau = this.icoOiseau.getImage();
+		}
+	}
+
+
+	@Override
+	public void run() {
+
+		while(true) {
+			
+			this.Ailes(dOiseau);
+			this.dOiseau--;
+			try {
+				Thread.sleep(PAUSE);
+			} catch (InterruptedException e) {}
+		}
 	}
 
 }
