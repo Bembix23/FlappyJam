@@ -23,8 +23,8 @@ public class FlappyBird implements Runnable {
 	// Constructeur 
 	public FlappyBird(int xOiseau, int yOiseau, String strImage) {
 		
-		this.largeurOiseau = 34;
-		this.hauteurOiseau = 24;
+		this.largeurOiseau = 26;
+		this.hauteurOiseau = 39;
 		this.xOiseau = xOiseau;
 		this.YOiseau = yOiseau;
 		this.strImage = strImage;
@@ -58,7 +58,7 @@ public class FlappyBird implements Runnable {
 	private void Ailes(int dOiseau) {
 		
 		if (dOiseau > 10) {
-			this.icoOiseau = new ImageIcon(getClass() .getResource("/image/oiseau2.png"));
+			this.icoOiseau = new ImageIcon(getClass() .getResource("/image/iron-man1.png"));
 			this.imgOiseau = this.icoOiseau.getImage();
 			this.YOiseau = this.YOiseau - 3;
 			
@@ -67,7 +67,7 @@ public class FlappyBird implements Runnable {
 		} else if (dOiseau > 1) {
 			this.YOiseau = this.YOiseau - 1;
 		} else if (dOiseau == 1) {
-			this.icoOiseau = new ImageIcon(getClass() .getResource("/image/oiseau1.png"));
+			this.icoOiseau = new ImageIcon(getClass() .getResource("/image/iron-man2.png"));
 			this.imgOiseau = this.icoOiseau.getImage();
 		}
 	}

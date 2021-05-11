@@ -1,5 +1,7 @@
 package Jam;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.Random;
@@ -24,6 +26,9 @@ public class Scene extends JPanel {
 	public Tuyaux tuyauBas3;
 	
 	public FlappyBird flappyBird;
+	
+	private int score;
+	private Font police;
 	
 	private final int LargeurFond = 140;
 	private final int DistanceTuyaux = 250;
@@ -52,13 +57,16 @@ public class Scene extends JPanel {
 		this.tuyauHaut3 = new Tuyaux(this.xTuyaux + this.DistanceTuyaux *2, -150, "/image/tuyauHaut.png");
 		this.tuyauBas3 = new Tuyaux(this.xTuyaux + this.DistanceTuyaux *2, 250, "/image/tuyauBas.png");
 		
-		this.flappyBird = new FlappyBird(100, 150, "/image/oiseau1.png");
+		this.flappyBird = new FlappyBird(100, 150, "/image/iron-man2.png");
 		
 		TuyauxHasard = new Random();
 		
 		this.setFocusable(true);
 		this.requestFocusInWindow();
 		this.addKeyListener(new Clavier());
+		
+		this.score = 0;
+		this.police = new Font("Courier", Font.BOLD, 30);
 		
 		Thread DefilementEcran = new Thread(new Defilement());
 		DefilementEcran.start();
@@ -141,11 +149,25 @@ public class Scene extends JPanel {
 		return gameOver;
 	}
 	
+	private void score() {
+		if(this.tuyauBas1.getX() + this.tuyauBas1.getLargeur() == 95 || this.tuyauBas2.getX() + this.tuyauBas2.getLargeur() == 95 ||
+				this.tuyauBas3.getX() + this.tuyauBas3.getLargeur() == 95) {
+			this.score++;
+			Son.playSound("/son/point.wav");
+		}
+	}
+	
 	public void paintComponent (Graphics g) {
 		this.defilementFond(g);
 		this.defilementTuyaux(g);
+		this.score();
+		g.setFont(police);
+		g.setColor(Color.red);
+		g.drawString("" + score, 140, 50);
 		this.gameOver = this.collisionFlappy();
 		this.flappyBird.setYOiseau(this.flappyBird.getYOiseau() + 1);
 		g.drawImage(this.flappyBird.getImgOiseau(), this.flappyBird.getxOiseau(), this.flappyBird.getYOiseau(), null);
+		if(this.gameOver == true) {g.drawString("Fin du jeu", 60, 200);
+		Son.playSound("/son/hit.wav");}
 	}
 }
