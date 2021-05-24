@@ -1,6 +1,7 @@
 package Jam;
 
 
+import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 
@@ -59,7 +60,6 @@ public class Main {
 		fenetre.setContentPane(scene);
 		fenetre.setVisible(true);
 
-		
 	}
 
 }
