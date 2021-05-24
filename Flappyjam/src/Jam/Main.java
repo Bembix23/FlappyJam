@@ -1,16 +1,51 @@
 package Jam;
 
+
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
-import java.awt.EventQueue;
-import java.sql.Connection;
-import java.sql.DriverManager;
 
 public class Main {
 
 	public static JFrame fenetre;
+	public static JFrame f;
 	public static Scene scene;
 	
 	public static void main(String[] args) {
+		
+		f = new JFrame("MenuFlappyJam");
+		f.setSize(425, 425);
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		f.setLocationRelativeTo(null);
+		
+		f.setLayout(new GridLayout(3, 3));
+		
+		 JButton b = new JButton("Start with blue Bird");
+		 JButton b1 = new JButton("Start with red Bird");
+		 JButton b2 = new JButton("Start with yellow Bird");
+		 JButton b3 = new JButton("Start with Captain america");
+		 JButton b4 = new JButton("Start with Jedi Bird");
+		 JButton b5 = new JButton("Start with iron man");
+		 b.addActionListener(Main::actionPerformed);
+		 b1.addActionListener(Main::actionPerformed);
+		 b2.addActionListener(Main::actionPerformed);
+		 b3.addActionListener(Main::actionPerformed);
+		 b4.addActionListener(Main::actionPerformed);
+		 b5.addActionListener(Main::actionPerformed);
+		
+		f.getContentPane().add(b);
+	    f.getContentPane().add(b1);
+	    f.getContentPane().add(b2);
+	    f.getContentPane().add(b3);
+	    f.getContentPane().add(b4);
+	    f.getContentPane().add(b5);
+		
+		f.setVisible(true);
+	}
+	
+	public static void actionPerformed(ActionEvent e) {
 		
 		fenetre = new JFrame ("FlappyJam");
 		scene = new Scene();
@@ -23,26 +58,7 @@ public class Main {
 		
 		fenetre.setContentPane(scene);
 		fenetre.setVisible(true);
-		
-		EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                String BDD = "flappyjam";
-                String url = "jdbc:mysql://localhost:8080/" + BDD;
-                String user = "root";
-                String passwd = "root";
-                
-                try {
-                    Class.forName("com.mysql.jdbc.Driver");
-                    Connection conn = DriverManager.getConnection(url, user, passwd);
-                    System.out.println("Connecter");
-                } catch (Exception e){
-                    e.printStackTrace();
-                    System.out.println("Erreur");
-                    System.exit(0);
-                }
-            }
-            
-		});
+
 		
 	}
 
