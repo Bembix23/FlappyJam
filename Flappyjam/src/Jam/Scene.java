@@ -57,7 +57,7 @@ public class Scene extends JPanel {
 		this.tuyauHaut3 = new Tuyaux(this.xTuyaux + this.DistanceTuyaux *2, -150, "/image/tuyauHaut.png");
 		this.tuyauBas3 = new Tuyaux(this.xTuyaux + this.DistanceTuyaux *2, 250, "/image/tuyauBas.png");
 		
-		this.flappyBird = new FlappyBird(100, 150, "/image/iron-man2.png");
+		this.flappyBird = new FlappyBird(100, 150, "/image/flappy2.png");
 		
 		TuyauxHasard = new Random();
 		

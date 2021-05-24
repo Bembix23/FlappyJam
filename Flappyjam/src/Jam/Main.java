@@ -1,6 +1,9 @@
 package Jam;
 
 import javax.swing.JFrame;
+import java.awt.EventQueue;
+import java.sql.Connection;
+import java.sql.DriverManager;
 
 public class Main {
 
@@ -20,6 +23,8 @@ public class Main {
 		
 		fenetre.setContentPane(scene);
 		fenetre.setVisible(true);
+		
+		
 	}
 
 }
